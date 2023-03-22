@@ -1,28 +1,56 @@
-import React from "react";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { styled } from '@mui/system';
+import { useAuth } from '../contexts/AuthContext';
 
-function Navbar(props) {
-  const isLoggedIn = props.isLoggedIn;
+const LoginButton = styled(Button)({
+  marginLeft: 'auto',
+});
+
+function Navbar() {
+  const { currentUser, logout } = useAuth();
+  const [error, setError] = useState('');
+
+  async function handleLogout() {
+    setError('');
+
+    try {
+      await logout();
+    } catch {
+      setError('Failed to log out');
+    }
+  }
 
   return (
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        {isLoggedIn && (
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" component={Link} to="/" sx={{ flexGrow: 1 }}>
+          My App
+        </Typography>
+
+        {currentUser ? (
           <>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Logout</a></li>
+            <Typography variant="body1" sx={{ marginRight: '16px' }}>
+              Hello, {currentUser.email}
+            </Typography>
+            <LoginButton variant="contained" color="secondary" onClick={handleLogout}>
+              Logout
+            </LoginButton>
+          </>
+        ) : (
+          <>
+            <Button component={Link} to="/login" variant="outlined" color="inherit">
+              Login
+            </Button>
+            <Button component={Link} to="/signup" variant="contained" color="secondary">
+              Sign Up
+            </Button>
           </>
         )}
-        {!isLoggedIn && (
-          <>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Register</a></li>
-          </>
-        )}
-      </ul>
-    </nav>
+
+      </Toolbar>
+    </AppBar>
   );
 }
 

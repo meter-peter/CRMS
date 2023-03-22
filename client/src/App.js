@@ -1,46 +1,32 @@
-import React, { useState } from "react";
-import Navbar from "./components/Navbar";
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme } from '@mui/material/styles';
+import Navbar from './components/Navbar';
+import Signup from './views/Signup';
+import Login from './views/Login';
+import Dashboard from './views/Dashboard';
+import AuthProvider from './contexts/AuthContext';
+import Profile from './views/Profile';
+const theme = createTheme();
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isRegistering, setIsRegistering] = useState(false);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
-  const handleRegister = () => {
-    setIsRegistering(true);
-  };
-
-  const handleCancelRegister = () => {
-    setIsRegistering(false);
-  };
-
-  return (
-    <div>
-      <Navbar
-        isLoggedIn={isLoggedIn}
-        handleLogout={handleLogout}
-        handleRegister={handleRegister}
-      />
-      <main>
-        {!isLoggedIn && isRegistering && (
-          <RegisterForm handleCancelRegister={handleCancelRegister} />
-        )}
-        {!isLoggedIn && !isRegistering && (
-          <LoginForm handleLogin={handleLogin} handleRegister={handleRegister} />
-        )}
-        {/* Render your main content here */}
-      </main>
-    </div>
-  );
-}
-
+    return (
+      <Router>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <AuthProvider>
+            <Navbar />
+            <Routes>
+              <Route element={<Login />} path="/login" />
+              <Route element={<Signup />} path="/signup" />
+              <Route element={<Dashboard />} path="/dashboard" />
+              <Route element={<Profile />} path="/profile" />
+            
+            </Routes>
+          </AuthProvider>
+        </ThemeProvider>
+      </Router>
+    );
+  }
+  
 export default App;
