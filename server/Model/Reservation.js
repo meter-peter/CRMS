@@ -1,26 +1,44 @@
 const mongoose = require('mongoose');
 
 const reservationSchema = new mongoose.Schema({
-  roomId: {
+  room: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Room',
     required: true
   },
-  teachingId: {
+  teacher: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Teaching',
+    ref: 'Teacher',
+    required: true
+  },
+  course: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Course',
+    required: true
+  },
+  startDate: {
+    type: Date,
+    required: true
+  },
+  endDate: {
+    type: Date,
     required: true
   },
   startTime: {
-    type: Date,
+    type: String,
     required: true
   },
-  endTime: {
-    type: Date,
+  duration: {
+    type: Number,
     required: true
   },
+  recurring: {
+    type: Boolean,
+    default: false
+  },
+  recurringEndDate: {
+    type: Date
+  }
 });
 
-const Reservation = mongoose.model('Reservation', reservationSchema);
-
-module.exports = Reservation;
+module.exports = mongoose.model('Reservation', reservationSchema);

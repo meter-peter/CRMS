@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
-const teachingSchema = new mongoose.Schema({
-  courseId: {
+const teacherSchema = new mongoose.Schema({
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Course',
-    required: true
+    ref: 'User',
+    required: true,
+    unique: true
   },
-  teachers: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }]
+  type: {
+    type: String,
+    enum: ['faculty', 'EDIP', 'ETEP'],
+    required: true
+  }
 });
 
-const Teaching = mongoose.model('Teaching', teachingSchema);
-
-module.exports = Teaching;
+module.exports = mongoose.model('Teacher', teacherSchema);

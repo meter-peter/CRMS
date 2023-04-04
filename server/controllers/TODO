@@ -1,0 +1,57 @@
+    departmentController.js
+        createDepartment()
+        getAllDepartments()
+        getDepartmentById()
+        updateDepartment()
+        deleteDepartment()
+
+    courseController.js
+        createCourse()
+        getAllCourses()
+        getCourseById()
+        updateCourse()
+        deleteCourse()
+
+    userController.js
+        createUser()
+        getAllUsers()
+        getUserById()
+        updateUser()
+        deleteUser()
+        loginUser()
+        logoutUser()
+
+    roomController.js
+        createRoom()
+        createRoomsBulk()
+        getAllRooms()
+        getRoomById()
+        updateRoom()
+        deleteRoom()
+        searchRooms()
+
+    reservationController.js
+        createReservation()
+        createReservationsBulk()
+        getAllReservations()
+        getReservationById()
+        updateReservation()
+        deleteReservation()
+        showBooking()
+        showBookings()
+
+    teachingController.js
+        createTeaching()
+        getAllTeachings()
+        getTeachingById()
+        updateTeaching()
+        deleteTeaching()
+
+    teachingReplacementRequestController.js
+        createTeachingReplacementRequest()
+        getAllTeachingReplacementRequests()
+        getTeachingReplacementRequestById()
+        updateTeachingReplacementRequest()
+        acceptTeachingReplacementRequest()
+        rejectTeachingReplacementRequest()
+        showTeachingReplacementRequestStatus()

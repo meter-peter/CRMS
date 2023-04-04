@@ -1,27 +1,66 @@
 const mongoose = require('mongoose');
 
 const roomSchema = new mongoose.Schema({
+  building: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Building',
+    required: true
+  },
   name: {
     type: String,
-    required: true,
-    unique: true
+    required: true
+  },
+  type: {
+    type: String,
+    enum: ['laboratory', 'teaching'],
+    required: true
   },
   capacity: {
     type: Number,
     required: true
   },
-  hourlyAvailability: {
-    start: { type: Number, required: true },
-    end: { type: Number, required: true }
+  computers: {
+    type: Number,
+    default: 0
   },
-  weeklyAvailability: [{
+  projector: {
+    type: Boolean,
+    default: false
+  },
+  locked: {
+    type: Boolean,
+    default: false
+  },
+  hourlyAvailability: [{
     dayOfWeek: {
       type: String,
-      enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+      enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      required: true
+    },
+    startTime: {
+      type: String,
+      required: true
+    },
+    endTime: {
+      type: String,
+      required: true
+    }
+  }],
+  weeklyAvailability: [{
+    startTime: {
+      type: String,
+      required: true
+    },
+    endTime: {
+      type: String,
+      required: true
+    },
+    dayOfWeek: {
+      type: String,
+      enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      required: true
     }
   }]
 });
 
-const Room = mongoose.model('Room', roomSchema);
-
-module.exports = Room;
+module.exports = mongoose.model('Room', roomSchema);
