@@ -15,6 +15,11 @@ const userSchema = new mongoose.Schema({
         enum: ['teacher', 'booking_manager', 'user_manager'],
         required: true
     },
+    departmentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Department',
+        required: true
+    },
     firstName: {
         type: String,
         required: true
