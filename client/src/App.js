@@ -8,6 +8,8 @@ import Login from './views/Login';
 import Dashboard from './views/Dashboard';
 import AuthProvider from './contexts/AuthContext';
 import Profile from './views/Profile';
+import Users from './views/Users';
+import Departments from './views/Departments';
 const theme = createTheme();
 function App() {
     return (
@@ -21,6 +23,8 @@ function App() {
               <Route element={<Signup />} path="/signup" />
               <Route element={<Dashboard />} path="/dashboard" />
               <Route element={<Profile />} path="/profile" />
+              <Route element={<Users/>} path="/users" />
+              <Route element={<Departments/>} path="/departments"/>
             
             </Routes>
           </AuthProvider>

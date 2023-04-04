@@ -6,7 +6,7 @@ const cors = require('cors')
 const passport = require('passport');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
-app.use(cors({ origin: ['http://localhost:8080'], }))
+
 
 app.use(cors());
 
@@ -25,6 +25,8 @@ const usersManager = require('./routes/usersManager');
 app.use('/usersManager', usersManager);
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
+const departmentsRoutes = require('./routes/departments');
+app.use('/departments', departmentsRoutes);
 
 
 app.listen(PORT, () => {
