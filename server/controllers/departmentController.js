@@ -57,14 +57,20 @@ exports.updateDepartment = async (req, res) => {
 
 // DELETE a department by id
 exports.deleteDepartment = async (req, res) => {
-  try {
-    const department = await Department.findById(req.params.id);
-    if (!department) {
-      return res.status(404).json({ message: 'Department not found' });
+    const { id } = req.params;
+  
+    try {
+      const department = await Department.findById(id);
+  
+      if (!department) {
+        return res.status(404).json({ message: `Department with id ${id} not found` });
+      }
+  
+      await Department.deleteOne({ _id: id }); // Use the deleteOne method instead of remove
+  
+      res.status(200).json({ message: `Department with id ${id} deleted successfully` });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Something went wrong' });
     }
-    await department.remove();
-    res.json({ message: 'Department deleted' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+  };
