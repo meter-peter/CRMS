@@ -52,6 +52,7 @@ const DepartmentsButton = styled(Button)(({ theme }) => ({
 }));
 
 const Departments = () => {
+  
   const [departments, setDepartments] = useState([]);
   const [newDepartmentName, setNewDepartmentName] = useState('');
   const [newDepartmentDescription, setNewDepartmentDescription] = useState('');
@@ -87,6 +88,8 @@ const Departments = () => {
     }
   };
 
+
+  
   const handleDeleteDepartment = async (departmentId) => {
     try {
       await axios.delete(`http://localhost:5000/departments/${departmentId}`);

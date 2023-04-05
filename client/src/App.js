@@ -10,6 +10,7 @@ import AuthProvider from './contexts/AuthContext';
 import Profile from './views/Profile';
 import Users from './views/Users';
 import Departments from './views/Departments';
+// import Home from './views/Home';
 const theme = createTheme();
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
               <Route element={<Profile />} path="/profile" />
               <Route element={<Users/>} path="/users" />
               <Route element={<Departments/>} path="/departments"/>
+              {/* <Route element = {<Home/>}path = "/"/> */}
             
             </Routes>
           </AuthProvider>
